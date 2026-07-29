@@ -24,11 +24,6 @@ categories:
     exclusive: true
     when:
       label: "bugfix"
-  - title: "⬆️ Dependency updates"
-    collapse-after: 5
-    exclusive: true
-    when:
-      label: "dependencies"
   - title: "🚀 Enhancements"
     exclusive: true
     when:
@@ -46,6 +41,11 @@ categories:
       labels:
         - "maintenance"
         - "ci"
+  - title: "⬆️ Dependency updates"
+    collapse-after: 5
+    exclusive: true
+    when:
+      label: "dependencies"
   - type: version-resolver
     semver-increment: major
     when:

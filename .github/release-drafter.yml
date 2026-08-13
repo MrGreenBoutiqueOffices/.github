@@ -1,7 +1,7 @@
 ---
 name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
-change-template: "- $TITLE ([#$NUMBER]($URL)) @$AUTHOR"
+change-template: "- [#$NUMBER]($URL) $TITLE @$AUTHOR"
 change-title-escapes: '\<*_&`'
 sort-direction: ascending
 

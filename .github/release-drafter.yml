@@ -23,7 +23,10 @@ categories:
   - title: "🐛 Bug fixes"
     exclusive: true
     when:
-      label: "bugfix"
+      labels:
+        - "bugfix"
+        # lean type label used by Skynet (and compatible repos)
+        - "bug"
   - title: "🚀 Enhancements"
     exclusive: true
     when:
@@ -41,6 +44,8 @@ categories:
       labels:
         - "maintenance"
         - "ci"
+        # lean type label used by Skynet (and compatible repos)
+        - "tech-debt"
   - title: "⬆️ Dependency updates"
     collapse-after: 5
     exclusive: true

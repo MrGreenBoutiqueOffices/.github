@@ -64,3 +64,18 @@ complete local list when a repository needs substantially different categories.
 
 A repository that intentionally needs fully independent behavior can use a
 standalone local configuration without `_extends`.
+
+### Label aliases for lean type labels
+
+Category matching stays on the shared org labels. Where product repos use lean
+type labels instead of the historical org names, the shared config also accepts:
+
+| Changelog section | Historical org labels | Lean aliases |
+| ----------------- | --------------------- | ------------ |
+| Bug fixes | `bugfix` | `bug` |
+| Maintenance | `maintenance`, `ci` | `tech-debt` |
+
+SemVer resolution remains label-driven via `major` / `minor`, with patch as the
+default when neither is present. Do not introduce a second release label
+taxonomy in application repositories.
+

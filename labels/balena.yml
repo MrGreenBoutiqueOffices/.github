@@ -1,0 +1,11 @@
+---
+extends:
+  - ./base.yml
+
+labels:
+  - name: "deploy-pr"
+    color: 8b5cf6
+    description: "Deploy this PR to Balena fleet."
+  - name: "balena-blocks"
+    color: f59e0b
+    description: "Updates to Balena block dependencies."

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["helpers:pinGitHubActionDigests"],
+  "timezone": "Europe/Amsterdam",
+  "schedule": ["before 6am every weekday"],
+  "rebaseWhen": "behind-base-branch",
+  "dependencyDashboard": true,
+  "commitMessagePrefix": "⬆️",
+  "packageRules": [
+    {
+      "description": "Keep GitHub Actions grouped and pinned to immutable digests.",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions",
+      "groupSlug": "github-actions",
+      "rangeStrategy": "pin"
+    }
+  ]
+}

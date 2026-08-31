@@ -64,3 +64,26 @@ complete local list when a repository needs substantially different categories.
 
 A repository that intentionally needs fully independent behavior can use a
 standalone local configuration without `_extends`.
+
+## Label synchronization
+
+Organization labels are managed centrally with
+[Label Blueprint](https://github.com/klaasnicolaas/action-label-blueprint).
+The shared set of 31 labels lives in `labels/base.yml`. `labels/balena.yml`
+extends that baseline with the `deploy-pr` and `balena-blocks` labels used by
+the Balena repositories.
+
+Pull requests that change a blueprint or the synchronization workflow run a
+preview for every target repository. Merges to `main` apply the configuration;
+the workflow can also be started manually. The action does not prune labels,
+so labels outside these blueprints remain untouched.
+
+The workflow requires the `LABEL_SYNC_TOKEN` Actions secret. It must contain a
+fine-grained personal access token with Issues write access to every listed
+target repository. The built-in `GITHUB_TOKEN` is scoped to this repository
+and cannot update labels in other repositories. A GitHub App can be used
+instead, but its short-lived installation token must be generated during each
+workflow run rather than stored in this secret.
+
+GitHub Action versions in the central workflow are pinned to immutable commit
+SHAs and maintained by Renovate through `.github/renovate.json`.

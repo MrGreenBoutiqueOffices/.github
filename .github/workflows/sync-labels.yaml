@@ -1,0 +1,106 @@
+---
+# yamllint disable rule:line-length
+name: Sync labels
+
+# yamllint disable-line rule:truthy
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/sync-labels.yaml"
+      - "labels/**"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/sync-labels.yaml"
+      - "labels/**"
+  workflow_dispatch:
+
+concurrency:
+  group: sync-labels-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    name: Preview ${{ matrix.name }} labels
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: base
+            labels_file: labels/base.yml
+            repositories: |
+              MrGreenBoutiqueOffices/python-NetOS
+              MrGreenBoutiqueOffices/python-netlink
+              MrGreenBoutiqueOffices/home-assistant-netlink
+              MrGreenBoutiqueOffices/knx2home
+              MrGreenBoutiqueOffices/netlink-block-template
+              MrGreenBoutiqueOffices/python-balena-cloud
+              MrGreenBoutiqueOffices/netlink-onboard
+              MrGreenBoutiqueOffices/netlink-watchdog
+              MrGreenBoutiqueOffices/netlink-desk
+              MrGreenBoutiqueOffices/netlink-ha-cards
+              MrGreenBoutiqueOffices/netlink-display
+              MrGreenBoutiqueOffices/netlink-webserver
+              MrGreenBoutiqueOffices/kiosk-wpe
+              MrGreenBoutiqueOffices/netlink-base-python
+          - name: Balena
+            labels_file: labels/balena.yml
+            repositories: |
+              MrGreenBoutiqueOffices/netlink_balena
+              MrGreenBoutiqueOffices/Netlink-TSH
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - name: Preview label changes
+        uses: klaasnicolaas/action-label-blueprint@90f2ea1ff380df2e6c1c83f39797998f54cc97ab  # v1.1.0
+        with:
+          github-token: ${{ secrets.LABEL_SYNC_TOKEN }}
+          labels-file: ${{ matrix.labels_file }}
+          repositories: ${{ matrix.repositories }}
+          mode: preview
+
+  sync:
+    name: Sync ${{ matrix.name }} labels
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: base
+            labels_file: labels/base.yml
+            repositories: |
+              MrGreenBoutiqueOffices/python-NetOS
+              MrGreenBoutiqueOffices/python-netlink
+              MrGreenBoutiqueOffices/home-assistant-netlink
+              MrGreenBoutiqueOffices/knx2home
+              MrGreenBoutiqueOffices/netlink-block-template
+              MrGreenBoutiqueOffices/python-balena-cloud
+              MrGreenBoutiqueOffices/netlink-onboard
+              MrGreenBoutiqueOffices/netlink-watchdog
+              MrGreenBoutiqueOffices/netlink-desk
+              MrGreenBoutiqueOffices/netlink-ha-cards
+              MrGreenBoutiqueOffices/netlink-display
+              MrGreenBoutiqueOffices/netlink-webserver
+              MrGreenBoutiqueOffices/kiosk-wpe
+              MrGreenBoutiqueOffices/netlink-base-python
+          - name: Balena
+            labels_file: labels/balena.yml
+            repositories: |
+              MrGreenBoutiqueOffices/netlink_balena
+              MrGreenBoutiqueOffices/Netlink-TSH
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - name: Synchronize labels
+        uses: klaasnicolaas/action-label-blueprint@90f2ea1ff380df2e6c1c83f39797998f54cc97ab  # v1.1.0
+        with:
+          github-token: ${{ secrets.LABEL_SYNC_TOKEN }}
+          labels-file: ${{ matrix.labels_file }}
+          repositories: ${{ matrix.repositories }}

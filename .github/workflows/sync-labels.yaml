@@ -47,6 +47,7 @@ jobs:
               MrGreenBoutiqueOffices/netlink-ha-cards
               MrGreenBoutiqueOffices/netlink-display
               MrGreenBoutiqueOffices/netlink-webserver
+              MrGreenBoutiqueOffices/netlink-agent
               MrGreenBoutiqueOffices/kiosk-wpe
               MrGreenBoutiqueOffices/netlink-base-python
           - name: Balena
@@ -88,6 +89,7 @@ jobs:
               MrGreenBoutiqueOffices/netlink-ha-cards
               MrGreenBoutiqueOffices/netlink-display
               MrGreenBoutiqueOffices/netlink-webserver
+              MrGreenBoutiqueOffices/netlink-agent
               MrGreenBoutiqueOffices/kiosk-wpe
               MrGreenBoutiqueOffices/netlink-base-python
           - name: Balena

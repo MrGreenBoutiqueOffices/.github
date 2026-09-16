@@ -51,6 +51,7 @@ jobs:
               MrGreenBoutiqueOffices/kiosk-wpe
               MrGreenBoutiqueOffices/netlink-base-python
               MrGreenBoutiqueOffices/nexudus-auth0-bridge
+              MrGreenBoutiqueOffices/nexudus-salto-bridge
           - name: Balena
             labels_file: labels/balena.yml
             repositories: |
@@ -94,6 +95,7 @@ jobs:
               MrGreenBoutiqueOffices/kiosk-wpe
               MrGreenBoutiqueOffices/netlink-base-python
               MrGreenBoutiqueOffices/nexudus-auth0-bridge
+              MrGreenBoutiqueOffices/nexudus-salto-bridge
           - name: Balena
             labels_file: labels/balena.yml
             repositories: |
